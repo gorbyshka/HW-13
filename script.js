@@ -55,17 +55,23 @@ let users = [
   }
 ]
 
-let arr = [];
-let arr2 = [];
+const phoneUsers = [];
 let sum = 0;
 
-for (let i = 0; i < users.length; i++) {
-  if (users[i].balance > '$2,000') {
-    arr += users[i].phone + ',  ';
+function convertingtoNumber(user) {
+  let userBalance = '';
+  for (let i = 0; i < users[user].balance.length; i++) {
+    if (users[user].balance[i] !== '$' && users[user].balance[i] !== ',') userBalance += users[user].balance[i];
   }
-  arr2 = users[i].balance.slice(1).replace(/[\s.,%]/g, '');
-  sum =+ arr2;
+  return +userBalance;
 }
 
-console.log('Номера пользователей у которых на счету больше 2000$: ' + arr);
-console.log('Сумма всех балансов пользователей: ' + sum + '$');
+for (let k = 0; k < users.length; k++) {
+  sum += convertingtoNumber(k);
+
+  if (convertingtoNumber(k) > 2000) phoneUsers.push(users[k].phone);
+}
+
+console.log('Номера пользователей у которых на счету больше 2000$: ' + phoneUsers.join('  '));
+
+console.log('Сумма всех балансов пользователей: ' + sum.toFixed(2) + '$');

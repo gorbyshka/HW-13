@@ -58,18 +58,18 @@ let users = [
 const phoneUsers = [];
 let sum = 0;
 
-function convertingtoNumber(user) {
+function convertingToNumber(balance) {
   let userBalance = '';
-  for (let i = 0; i < users[user].balance.length; i++) {
-    if (users[user].balance[i] !== '$' && users[user].balance[i] !== ',') userBalance += users[user].balance[i];
+  for (let i = 0; i < users[balance].balance.length; i++) {
+    if (users[balance].balance[i] !== '$' && users[balance].balance[i] !== ',') userBalance += users[balance].balance[i];
   }
   return +userBalance;
 }
 
 for (let k = 0; k < users.length; k++) {
-  sum += convertingtoNumber(k);
+  sum += convertingToNumber(k);
 
-  if (convertingtoNumber(k) > 2000) phoneUsers.push(users[k].phone);
+  if (convertingToNumber(k) > 2000) phoneUsers.push(users[k].phone);
 }
 
 console.log('Номера пользователей у которых на счету больше 2000$: ' + phoneUsers.join('  '));

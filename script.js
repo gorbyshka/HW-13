@@ -55,23 +55,22 @@ let users = [
   }
 ]
 
-const phoneUsers = [];
 let sum = 0;
 
-function convertingToNumber(balance) {
-  let userBalance = '';
-  for (let i = 0; i < users[balance].balance.length; i++) {
-    if (users[balance].balance[i] !== '$' && users[balance].balance[i] !== ',') userBalance += users[balance].balance[i];
+function convertingToNumber(userBalance) {
+  let strBalance = '';
+  for (const symbol of userBalance) {
+    
+    if (!['$', ','].includes(symbol)) strBalance += symbol;
   }
-  return +userBalance;
+  return +strBalance;
 }
 
-for (let k = 0; k < users.length; k++) {
-  sum += convertingToNumber(k);
+for (const user of users) {
 
-  if (convertingToNumber(k) > 2000) phoneUsers.push(users[k].phone);
+  convertingToNumber(user.balance) > 2000 && console.log('Номера пользователя у которого на счету больше 2000$: ' + user.phone);
 }
 
-console.log('Номера пользователей у которых на счету больше 2000$: ' + phoneUsers.join('  '));
+users.forEach(({ balance }) => sum += convertingToNumber(balance));
 
 console.log('Сумма всех балансов пользователей: ' + sum.toFixed(2) + '$');
